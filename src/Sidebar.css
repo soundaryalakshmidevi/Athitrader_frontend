@@ -1,0 +1,159 @@
+/* AppBar.css */
+.logout-container {
+    /* padding: 16px;  */
+    text-align: center; /* Center align the button */
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center the button horizontally */
+}
+.app-bar {
+    background: #188b3E !important;
+    margin-left: 200px !important; /* Default expanded sidebar width */
+    z-index: 1201 !important; /* Keeps AppBar above Drawer */
+    position: fixed !important;
+    width: calc(100% - 200px); /* Full width minus sidebar width */
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.app-bar.collapsed {
+    margin-left: 60px !important; /* Adjust for minimized sidebar */
+    width: calc(100% - 60px); /* Adjusted width */
+}
+
+.toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.title {
+    flex-grow: 1;
+    font-size: 1.5rem;
+    color: #f4f4f4 !important;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    width: 200px !important;
+    height: 80px !important;
+    transition: width 0.3s ease;
+    margin-left: -23px;
+
+}
+
+.logo-container.collapsed {
+    width: 60px !important; /* Adjust width for collapsed sidebar */
+}
+
+.logo {
+    width: 150px !important;
+    height: 80px !important;
+    margin-left: 30px;
+}
+
+.logout-button {
+    background-color: #188b3E !important;
+    width: 100px !important;
+    color: white;
+    font-size: 18px !important;
+    justify-content: flex-start;
+}
+
+.sidebar {
+    width: 240px; /* Adjust as per your design */
+    transition: width 0.3s; /* Smooth transition */
+}
+
+.sidebar.collapsed {
+    width: 60px; /* Width when collapsed */
+}
+
+.content {
+    transition: margin-left 0.3s; /* Smooth transition for content */
+}
+
+/* Additional styles for when sidebar is collapsed */
+.content.collapsed {
+    margin-left: 60px; /* Adjust this to match the collapsed sidebar width */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding-left: 20px !important;
+    margin-top: 80px;
+}
+
+.sidebar .MuiListItemText-primary {
+    font-weight: bold;
+}
+
+.sidebar .MuiListItem {
+    transition: background-color 0.3s;
+}
+
+.sidebar .MuiListItem:hover {
+    background-color: #e0e0e0;
+}
+
+/* List Item Styling */
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-item:hover {
+    background-color: #e0e0e0;
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.arrow-icon {
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.8s, transform 0.8s;
+}
+
+.list-item:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(0.5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 195px !important;
+        padding-top: 20px;
+    }
+
+    .sidebar.collapsed {
+        width: 0 !important; /* Hidden on smaller screens */
+    }
+
+    .appContent {
+        margin-left: 0 !important;
+        padding-top: 20px !important;
+    }
+
+    .app-bar {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+
+    .logout-button {
+        display: none;
+    }
+}
+
+@media (min-width: 601px) {
+    .logout-container {
+        display: none; /* Hide the logout button on larger screens */
+    }
+}

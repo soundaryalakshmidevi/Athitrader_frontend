@@ -1,0 +1,13 @@
+/* src/styles/GetStarted.css */
+.main {
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+    background-image: url('./asset/AT background.png'); /* Path to your background image */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

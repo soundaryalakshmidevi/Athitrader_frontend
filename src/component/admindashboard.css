@@ -1,0 +1,118 @@
+.dashboard-main {
+    flex-grow: 1;
+    padding: 24px;
+    margin-top: 5px;
+    margin-left: 0;
+    width: 100%;
+  }
+  .chart-card {
+    padding: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 350px;
+    overflow: hidden;
+  }
+  
+  .chart-title {
+    color: #188b3E;
+  }
+  
+  .view-more-link {
+    text-decoration: none;
+    color: #188b3E;
+  }
+  
+  .table-container {
+    overflow-y: auto;
+    max-height: 300px;
+    overflow-x: auto;
+  }
+  
+  /* Table Row Styling */
+  .chart-card .MuiTableRow-root {
+    background-color: #f0f5f5; /* light green background for rows */
+  }
+  
+  .chart-card .MuiTableRow-root + .MuiTableRow-root {
+    border-top: 2px solid mediumseagreen; /* Add a medium sea green line between rows */
+  }
+  
+  .chart-card .MuiTableCell-root {
+    padding: 12px; /* Adds spacing around cell content */
+  }
+  
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  
+  
+  @media (min-width: 600px) {
+    .dashboard-main {
+      margin-left: 0px;
+      width: calc(100% - 240px);
+    }
+  }
+  
+  .dashboard-header {
+    margin-top: 80px;
+  }
+  
+  .header-title {
+    color: #188b3E;
+  }
+  
+  .header-avatar {
+    background-color: #188b3E;
+  }
+  
+  .stat-card {
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stat-value {
+    color: #188b3E;
+  }
+  
+  .chart-card {
+    padding: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .chart-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .chart-title {
+    color: #188b3E;
+  }
+  
+  .view-more-link {
+    text-decoration: none;
+  }
+  
+  .employee-summary {
+    padding: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 90%;
+  }
+  
+  .employee-summary:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .employee-title {
+    color: #188b3E;
+  }
+  

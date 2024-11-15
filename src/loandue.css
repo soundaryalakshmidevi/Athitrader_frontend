@@ -1,0 +1,163 @@
+.table-container-loandue {
+    width: 800px;
+    margin: 20px 0; /* Add some margin for spacing */
+    padding: 5px; /* Add padding for a better look */
+    /* background-color: mediumseagreen !important; */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.loan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.loan-table th, .loan-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.loan-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.loan-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.loan-table tr:hover {
+    background-color: #ddd;
+}
+
+
+
+
+.seperate {
+    margin-bottom: 20px; /* Adjust the value as needed */
+    padding: 10px; /* Optional: adds padding for better spacing */
+    border: 1px solid #f0f0f0; /* Optional: adds a light border for visual separation */
+    border-radius: 5px; /* Optional: rounded corners */
+    background-color: mediumseagreen; /* Optional: white background for better contrast */
+}
+.loan-group-loandue {
+    justify-content: space-between !important;
+    bottom: 20px;
+    border: 0px solid #ddd;
+    margin-bottom: 20px; /* Add margin at the bottom for spacing */
+}
+
+.pending-loan {
+    background-color: brown !important; /* Change to desired color */
+    color: white !important; /* Optional: change text color for contrast */
+}
+.downloadcotainer {
+    margin-bottom: 10px; /* Adds space between button and the table */
+}
+
+.download-button {
+    background-color: #007bff; /* Customize button color */
+    color: white;
+    font-size: 14px;
+}
+
+/* Container for table cells */
+td {
+    padding: 8px; /* Adds padding inside table cells */
+    text-align: left; /* Aligns text to the left */
+    vertical-align: middle; /* Aligns the contents vertically in the middle */
+}
+
+/* Date input field styling */
+input[type="date"] {
+    background-color: mediumseagreen;
+    padding: 6px 8px; /* Adjusts the padding for the date input */
+    font-size: 14px; /* Sets a consistent font size */
+    border: 1px solid #ccc; /* Light border around the input */
+    border-radius: 4px; /* Rounds the corners slightly */
+    width: 100%; /* Make it fill the table cell */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Dropdown select styling */
+select {
+    background-color: mediumseagreen;
+    padding: 6px 8px; /* Adjusts padding inside the dropdown */
+    font-size: 14px; /* Consistent font size with the date input */
+    border: 1px solid #ccc; /* Light border around the dropdown */
+    border-radius: 4px; /* Rounds the corners */
+    width: 100%; /* Make it fill the table cell */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Optional: Add hover effect for inputs and select */
+input[type="date"]:hover,
+select:hover {
+    border-color: #7f223d; /* Change border color on hover */
+    background-color: white;
+}
+
+/* Optional: Style for focused elements */
+input[type="date"]:focus,
+select:focus {
+    background-color: white !important;
+    outline: none;
+    border-color: #7f223d; /* Focus border color */
+    box-shadow: 0 0 3px rgba(127, 34, 61, 0.5); /* Slight shadow to indicate focus */
+}
+
+/* loandue.css */
+
+.input-number {
+    background-color: mediumseagreen;
+    width: 100%; /* Full width */
+    padding: 6px; /* Padding around the text */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    box-sizing: border-box; /* Ensures padding is included in total width/height */
+}
+
+/* Optional: Add styles for focus state */
+.input-number:focus {
+    background-color: white !important;
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+}
+.input-number:hover {
+    background-color: white !important;
+}
+
+
+
+.status-select {
+    width: 100%; /* Full width */
+    padding: 6px; /* Padding around the text */
+    /* border: 1px solid #ccc;  */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Change cursor to pointer */
+    box-sizing: border-box; /* Ensures padding is included in total width/height */
+}
+
+/* Optional: Add styles for focus state */
+.status-select:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 600px) {
+    .input-number {
+        font-size: 14px; /* Smaller font size on smaller screens */
+    }
+    .status-select {
+        font-size: 14px; /* Smaller font size on smaller screens */
+    }
+}

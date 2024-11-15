@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    margin: 0 0 0 180px !important;
+  }
+  
+  .sidebar {
+    width: 240px;
+  }
+  
+ 
+  
+  .small-button {
+    width: 200px;
+    background-color: #188b3e;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .small-button:hover {
+    background-color: #145a2c;
+  }
+  
+  .table-container-loancategory {
+    width: 80%;
+    margin-top: 50px;
+    /* margin: 20px 10px 20px 100px;
+    padding: 10px 30px 10px 10px; */
+    overflow-x: auto;
+    background-color: white;
+  }
+  
+  .maincard {
+
+    background-color: mediumseagreen;
+    border-radius: 20px;
+  }
+  
+  .employee-card-loancategory  {
+    padding: 10px;
+    margin: 10px 0;
+    height: auto;
+    
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.3s ease;
+   
+  }
+  
+  .employee-detail-item-loancategory {
+    display: flex; 
+    flex-direction: column !important;
+    
+   
+    gap: 5px; 
+}
+.employee-detail-item-loancategory strong {
+    margin-right: 5px; /* Space between label and value */
+}
+  .employee-card.expanded  {
+    max-height: 300px !important;
+  }
+  .employee-details-loancategory{
+    margin: 10px ;
+    display: flex;
+  }
+  

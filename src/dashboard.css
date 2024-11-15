@@ -1,0 +1,85 @@
+/* Container styles */
+.dashboard-container {
+    display: flex !important;
+    margin-top: 1000px !important;
+    background-color: aqua !important;
+  }
+  
+  .dashboard-content {
+    flex-grow: 1;
+    padding: 24px;
+    color: aquamarine !important;
+  }
+  
+  /* Header styles */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    background-color: aqua !important;
+  }
+  
+  .dashboard-header-title {
+    font-size: 2rem;
+  }
+  
+  .dashboard-header-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard-avatar {
+    margin-left: 16px;
+  }
+  
+  /* Statistics cards */
+  .dashboard-cards {
+    margin-bottom: 24px;
+    background-color: aqua !important;
+  }
+  
+  .dashboard-card {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  /* Loan Summary and Add Customer */
+  .dashboard-section {
+    margin-bottom: 24px;
+    padding: 16px;
+  }
+  
+  .dashboard-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .dashboard-table {
+    width: 100%;
+  }
+  
+  .dashboard-meeting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  /* Working Activity */
+  .dashboard-activity {
+    padding: 16px;
+  }
+  
+  .dashboard-activity-header {
+    font-size: 1.25rem;
+  }
+  
+  .dashboard-activity-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
