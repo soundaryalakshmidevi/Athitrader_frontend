@@ -40,7 +40,7 @@
 
 /* Header for each city */
 .city-header {
-    background-color: #188b3E;
+    background-color: #07387A;
     padding: 15px;
     color: white;
     display: flex;
@@ -52,7 +52,7 @@
 }
 
 .city-header:hover {
-    background-color: #188b3E; /* Darker green on hover */
+    background-color: #07387A; /* Darker green on hover */
 }
 
 /* City title styling */
@@ -135,6 +135,7 @@ form {
 label {
     /* margin-bottom: 4px;  */
     font-weight: bold;
+    color: #07387A;
 }
 
 /* Input styles */

@@ -28,7 +28,7 @@
 
 h2 {
     margin-bottom: 20px; /* Space between title and form */
-    color: #333; /* Dark text color */
+    /* color: #fff; */
 }
 
 .form-group {
@@ -39,22 +39,24 @@ h2 {
 label {
     display: block; /* Stack labels above inputs */
     margin-bottom: 5px; /* Space between label and input */
-    color: #555; /* Text color for labels */
+    /* color: #fff;  */
 }
 
 input {
-    width: 100%; /* Full width inputs */
+    width: 92%; /* Full width inputs */
+    height: 27px;
     padding: 10px; /* Padding for inputs */
-    border: 1px solid #ccc; /* Light border */
+    
     border-radius: 5px; /* Rounded corners */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    /* box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);  */
+    margin-bottom: 20px;
 }
 
 button {
     margin: 20px 0px 45px 0px;
     width: 100%; /* Full width button */
     padding: 10px; /* Padding for button */
-    background-color: #188b3E; /* Button color */
+    /* background-color: #188b3E;  */
     color: white; /* Button text color */
     border: none; /* Remove border */
     border-radius: 25px; /* Rounded corners */

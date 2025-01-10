@@ -18,7 +18,9 @@ const Axios = axios.create({
 // baseURL: "http://192.168.1.13:8000/api",
 // baseURL: 'http://127.0.0.1:8000/api',
 // baseURL: ' https://reiosglobal.com/Athitraders_Backend/api',
-baseURL: ' https://athitraders.com/Athitraders_Backend/api',
+// baseURL: ' https://athitraders.com/Athitraders_Backend/api',
+// baseURL: ' https://athitraders.com/AM_Backend/api',
+baseURL: 'https://kitecareer.com/Sri_Vari_Finance_Backend/api',
 headers: {
   'Content-Type': 'application/json',
 },

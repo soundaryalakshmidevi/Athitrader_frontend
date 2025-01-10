@@ -16,12 +16,13 @@
     padding: 5px; 
     text-align: left; /* Align text to the left */
     border-bottom: 1px solid #ddd; /* Light border for separation */
-    background-color: mediumseagreen; /* Background color for table cells */
+    /* background-color: mediumseagreen;  */
     color: black; /* Text color for table cells */
 }
 
 .loan-due-table th {
     font-weight: bold; /* Bold text for header */
+    color:#07387A;
 }
 
 .loan-due-table tr:hover {

@@ -501,46 +501,67 @@ const CitiesWithDueLoans = () => {
                     </div>
                     {expandedLoanId === loanId && (
                         <div className="user-list">
-                            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                                <thead>
-                                    <tr>
-                                        <th>User ID</th>
-                                        <th>Due Amount</th>
-                                        <th>Paid Amount</th>
-                                        <th>Due Date</th>
-                                        <th>Paid Date</th>
-                                        <th>Status</th>
-                                        <th>Collection By</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {groupedLoans[loanId].map(employee => (
-                                        <tr key={employee.id}>
-                                            <td>{employee.user_id}</td>
-                                            <td>{employee.due_amount}</td>
-                                            <td>{employee.paid_amount}</td>
-                                            <td>{employee.due_date}</td>
-                                            <td>{employee.paid_on}</td>
-                                            <td>{employee.status}</td>
-                                            <td>{employee.collection_by}</td>
-                                            <td>
-                                                <a
-                                                    title="Edit"
-                                                    onClick={() => handleEditClick(employee)}
-                                                    style={{
-                                                        cursor: employee.status.toLowerCase() === "pending" || employee.status.toLowerCase() === "paid" ? "not-allowed" : "pointer",
-                                                        pointerEvents: employee.status.toLowerCase() === "pending" || employee.status.toLowerCase() === "paid" ? "none" : "auto",
-                                                        opacity: employee.status.toLowerCase() === "pending" || employee.status.toLowerCase() === "paid" ? 0.5 : 1
-                                                    }}
-                                                >
-                                                    <EditIcon />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                           <table
+  style={{
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: '10px',
+    color: 'white', // Font color
+    border: '1px solid white', // Table border color
+  }}
+>
+  <thead>
+    <tr>
+      <th style={{ border: '1px solid white' }}>User ID</th>
+      <th style={{ border: '1px solid white' }}>Due Amount</th>
+      <th style={{ border: '1px solid white' }}>Paid Amount</th>
+      <th style={{ border: '1px solid white' }}>Due Date</th>
+      <th style={{ border: '1px solid white' }}>Paid Date</th>
+      <th style={{ border: '1px solid white' }}>Status</th>
+      <th style={{ border: '1px solid white' }}>Collection By</th>
+      <th style={{ border: '1px solid white' }}>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {groupedLoans[loanId].map((employee) => (
+      <tr key={employee.id}>
+        <td style={{ border: '1px solid white' }}>{employee.user_id}</td>
+        <td style={{ border: '1px solid white' }}>{employee.due_amount}</td>
+        <td style={{ border: '1px solid white' }}>{employee.paid_amount}</td>
+        <td style={{ border: '1px solid white' }}>{employee.due_date}</td>
+        <td style={{ border: '1px solid white' }}>{employee.paid_on}</td>
+        <td style={{ border: '1px solid white' }}>{employee.status}</td>
+        <td style={{ border: '1px solid white' }}>{employee.collection_by}</td>
+        <td style={{ border: '1px solid white' }}>
+          <a
+            title="Edit"
+            onClick={() => handleEditClick(employee)}
+            style={{
+              cursor:
+                employee.status.toLowerCase() === 'pending' ||
+                employee.status.toLowerCase() === 'paid'
+                  ? 'not-allowed'
+                  : 'pointer',
+              pointerEvents:
+                employee.status.toLowerCase() === 'pending' ||
+                employee.status.toLowerCase() === 'paid'
+                  ? 'none'
+                  : 'auto',
+              opacity:
+                employee.status.toLowerCase() === 'pending' ||
+                employee.status.toLowerCase() === 'paid'
+                  ? 0.5
+                  : 1,
+            }}
+          >
+            <EditIcon />
+          </a>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
                         </div>
                     )}
                 </div>
@@ -561,11 +582,11 @@ const CitiesWithDueLoans = () => {
         onClose={handleCloseForm}
         sx={{ 
             '& .MuiDialogContent-root': {
-                backgroundColor: 'rgb(209, 241, 221)', 
+                backgroundColor: '#fff',color:'#07387A' 
             },
         }}
     >
-        <DialogTitle>Edit Employee Loan Details</DialogTitle>
+        <DialogTitle sx={{color:'#07387A'}}>Edit Employee Loan Details</DialogTitle>
         <DialogContent>
             {selectedEmployee && (
                 <>
@@ -577,8 +598,8 @@ const CitiesWithDueLoans = () => {
                         margin="normal"
                         InputProps={{
                             style: { 
-                                backgroundColor: '#f0f0f0',
-                                color: '#333',
+                                backgroundColor: '#fff',
+                                color: '#07387A',
                             },
                         }}
                     />
@@ -640,18 +661,19 @@ const CitiesWithDueLoans = () => {
             )}
         </DialogContent>
         <DialogActions>
-            <Button 
-                onClick={handleCloseForm} 
-                style={{ backgroundColor: '#3B82F6', color: 'white' }}
-            >
-                Cancel
-            </Button>
-            <Button 
+        <Button 
                 onClick={handleSubmiteditform} 
-                style={{ backgroundColor: '#EF4444', color: 'white' }}
+                style={{ backgroundColor: '#07387A', color: 'white' }}
             >
                 Save
             </Button>
+            <Button 
+                onClick={handleCloseForm} 
+                style={{ backgroundColor: 'red', color: 'white' }}
+            >
+                Cancel
+            </Button>
+            
         </DialogActions>
     </Dialog>
 

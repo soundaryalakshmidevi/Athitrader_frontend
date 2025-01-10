@@ -35,7 +35,7 @@ function ForgotPassword() {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${backgroundImage})`,
+        // backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -47,7 +47,7 @@ function ForgotPassword() {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            backgroundColor: 'mediumseagreen',
+            backgroundColor: '#06387A',
             padding: { xs: 2, sm: 3, md: 4 },
             borderRadius: 1,
             boxShadow: 3,
@@ -68,7 +68,9 @@ function ForgotPassword() {
               }}
             />
           )}
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom sx={{
+              marginTop: 2,
+              color: '#fff'}}>
             Forgot Password
           </Typography>
           <TextField
@@ -85,6 +87,7 @@ function ForgotPassword() {
               '& .MuiInputBase-input': {
                 color: '#fff',
               },
+             
             }}
           />
           <Button
@@ -93,10 +96,10 @@ function ForgotPassword() {
             onClick={handleSendOtp}
             sx={{
               marginTop: 2,
-              backgroundColor: '#fff',
-              color: 'mediumseagreen',
+              backgroundColor: '#E8B701',
+              color: '#fff',
               '&:hover': {
-                backgroundColor: '#f1f1f1',
+                backgroundColor: '#E8B701',
               },
             }}
             disabled={loading}

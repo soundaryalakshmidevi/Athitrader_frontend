@@ -6,7 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'; // Hamburger icon
 import '../Sidebar.css';
 import Swal from 'sweetalert2';
 // import logoImagenew from '../asset/Group34031.png';
-import logoImagenew from '../asset/Ab Logo.png'; // Adjusted relative path
+import logoImagenew from '../asset/Srivari Logo.png'; // Adjusted relative path
 
 import { useMediaQuery } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -35,7 +35,7 @@ const Sidebar = ({ isSidebarExpanded, setSidebarExpanded }) => {
             text: "Do you really want to log out?",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#188b3E',
+            confirmButtonColor: '#07387A',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, logout',
             cancelButtonText: 'No, stay'
@@ -84,18 +84,20 @@ const Sidebar = ({ isSidebarExpanded, setSidebarExpanded }) => {
                 open={isSidebarExpanded}
                 anchor="left"
                 className={`sidebar ${isSidebarExpanded ? 'expanded' : 'collapsed'}`}
+               
+
             >
                 <div className="sidebar-header">
-                    <IconButton onClick={toggleSidebarExpansion} className="expand-toggle">
+                    <IconButton onClick={toggleSidebarExpansion} className="expand-toggle" >
                         <MenuIcon />
                     </IconButton>
                 </div>
 
                 <List>
                     {menuItems.map((item, index) => (
-                        <ListItem button key={index} onClick={() => handleNavigation(item.path)} className="list-item">
-                            {item.icon}
-                            {isSidebarExpanded && <ListItemText primary={item.text} />}
+                        <ListItem button key={index} onClick={() => handleNavigation(item.path)} className="list-item" >
+                            {item.icon }
+                            {isSidebarExpanded && <ListItemText style={{backgroundColor:'#fff ',color:'#07387A', borderRadius:'5px'}} primary={item.text} />}
                         </ListItem>
                     ))}
                 </List>

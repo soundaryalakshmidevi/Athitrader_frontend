@@ -69,6 +69,32 @@ const Loandue = () => {
             const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
             const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             saveAs(blob, `Loan_${loanId}_Data.xlsx`);
+
+
+            
+        // Make an API call with user_id
+        const userId = localStorage.getItem('user_id');
+        const isoDate = new Date().toISOString(); // "2024-12-16T08:00:56.050Z"
+
+        // Convert to MySQL-compatible format (YYYY-MM-DD HH:MM:SS)
+        const now = isoDate.slice(0, 19).replace('T', ' '); // "2024-12-16 08:00:56"
+        // Send the payload using Axios
+        const apiResponse = await Axios.post('/download_loan_receipt', {
+            table_name: 'loan_due',
+            
+            modified_data: { receipt_type: "loan_receipt" },  
+           
+            modified_on: now,
+            modified_by: userId, // Include user_id from localStorage
+        });
+
+        // Handle API response
+        if (apiResponse.ok) {
+            const data = await apiResponse.json();
+            console.log('API response:', data);
+        } else {
+            console.error('API call failed:', apiResponse.statusText);
+        }
         } catch (error) {
             console.error('Error downloading loan data:', error);
         }
@@ -94,6 +120,8 @@ const Loandue = () => {
             const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
             const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             saveAs(blob, `Loans_${cityData.city}_Data.xlsx`);
+
+            
         } catch (error) {
             console.error('Error downloading city loans:', error);
         }
@@ -129,7 +157,9 @@ const Loandue = () => {
                     <Button 
                         className="ok-button" 
                         onClick={handleFetchLoans}
-                        variant="contained"
+                        // variant="contained"
+                        style={{backgroundColor:"#07387A"}}
+                    
                     >
                         OK
                     </Button>
@@ -146,16 +176,22 @@ const Loandue = () => {
                                 >
                                     <h4 style={{ margin: 0 }}>City: {cityData.city}</h4>
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <Button
-                                            style={{ marginRight: 8 }}
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleDownloadCityLoans(cityData);
-                                            }}
-                                            startIcon={<DownloadIcon />}
-                                            variant="contained"
-                                            color="primary"
-                                        />
+                                    <Button
+                                    sx={{
+                                        marginRight: 1, // Adjusted margin (Material-UI uses spacing scale, 1 equals 8px)
+                                        backgroundColor: '#1976d2', // Default button color (primary default)
+                                        color: '#fff', // Text color
+                                        '&:hover': {
+                                        backgroundColor: '#07387A', // Hover background color
+                                        },
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDownloadCityLoans(cityData);
+                                    }}
+                                    startIcon={<DownloadIcon />}
+                                    variant="contained"
+                                    ></Button>
                                         <DownOutlined />
                                     </div>
                                 </div>

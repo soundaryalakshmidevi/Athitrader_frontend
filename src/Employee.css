@@ -30,7 +30,7 @@ body {
 /* Button Styles */
 .small-button {
     width: 200px;
-    background-color: #188b3E;
+    background-color: #E8B701;
     color: white;
     border: none;
     padding: 10px;
@@ -41,7 +41,7 @@ body {
 
 .small-button1, .small-button2 {
     width: 100px;
-    background-color: #188b3E;
+    background-color: #E8B701;
     color: white;
     border: none;
     padding: 10px;
@@ -98,7 +98,7 @@ h2 {
 
 /* Loan Group Styles */
 .loan-group {
-    background-color: mediumseagreen !important;
+    background-color: #07387A !important;
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -146,7 +146,7 @@ h2 {
     width: 100%;
     margin-top: 20px;
     /* margin-left: 100px !important; */
-    overflow-x: auto;
+    /* overflow-x: auto; */
     max-width: 800px;
     background-color: white !important;
 }
@@ -185,10 +185,18 @@ select.category-type {
     width: 100%;
     padding: 8px;
     /* margin-bottom: 15px; */
-    border: 1px solid #ccc;
+     border: 1px solid #fff; 
+    border-radius: 4px;
+    /* background-color: #07387A; */
+    /* color: #fff; */
+}
+.cityfield
+{
+  
+    color: #fff; 
+    border: 1px solid!important; 
     border-radius: 4px;
 }
-
 input[type="text"]:focus,
 input[type="password"]:focus,
 select.category-type:focus {
@@ -196,6 +204,10 @@ select.category-type:focus {
     outline: none !important;
 }
 
+input[type="file"]
+{
+    border: 1px solid #ccc !important;
+}
 .employee-card-employee, .employee-card-customer {
     padding: 5px;
     margin: 15px 0;
@@ -209,12 +221,16 @@ select.category-type:focus {
     justify-content: space-between;
     
     width: 100%;
-    color: white !important;
+    color: #fff !important;
+    background-color: #07387A !important;
+    border: 2px solid #07387A !important;
+    border-radius: 28px;
 }
 
 .maincard {
-    background-color: mediumseagreen !important;
-    border-radius: 20px;
+     background-color: #fff !important;
+   /* border: 2px solid #07387A !important;
+    border-radius: 20px; */
 }
 
 .employee-name {

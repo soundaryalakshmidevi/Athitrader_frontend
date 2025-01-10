@@ -21,6 +21,7 @@ import Axios from "../Axios";
 import { Link } from 'react-router-dom';
 import { CircularProgress } from "@mui/material";
 import '../component/admindashboard.css';
+
 const DashboardPage = () => {
   const [totalCollection, setTotalCollection] = useState(0); 
   const [TotalLoan, setTotalLoan] = useState(0); 
@@ -231,7 +232,7 @@ fetchCollectionbyemp();
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="value" fill="#188b3E" />
+                    <Bar dataKey="value" fill="#07387A" />
                   </BarChart>
                 </ResponsiveContainer>
               </Paper>
@@ -249,7 +250,7 @@ fetchCollectionbyemp();
 
       {loading ? (
         <Box className="loading-spinner">
-          <CircularProgress color="inherit" />
+          <CircularProgress color="#07387A" />
         </Box>
       ) : (
         <Box className="table-container">

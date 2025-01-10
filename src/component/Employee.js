@@ -37,12 +37,27 @@ const Employee = () => {
   const [errors, setErrors] = useState({});
   const [cities, setCities] = useState([]); // State to store cities
   const city = [];
+
+  const [showDetails, setShowDetails] = useState(false);
+  const [originalPhotos, setOriginalPhotos] = useState({
+    profile_photo: null,
+    sign_photo: null,
+  });
+  const options = [...cities, { city_name: "Others" }]; // Include "Others" in the options
+  const [loading, setLoading] = useState(false);
+  const [expandedEmployeeId, setExpandedEmployeeId] = useState(null); // State to manage expanded employees
+  const [showNewCityInput, setShowNewCityInput] = useState(false);
+  const [isSidebarExpanded, setSidebarExpanded] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [EmployeeId, setEmployeeId] = useState(false);
   const [formData, setFormData] = useState({
     user_id: "",
     user_name: "",
     aadhar_number: "",
     address: "",
     city: "",
+    cityInput:"",
     pincode: "",
     district: "",
     user_type: "employee",
@@ -62,23 +77,13 @@ const Employee = () => {
     ref_aadhar_number: "", // Reference Aadhar Number
     sign_photo: "", // For signature photo
   });
-  const [showDetails, setShowDetails] = useState(false);
-  const [originalPhotos, setOriginalPhotos] = useState({
-    profile_photo: null,
-    sign_photo: null,
-  });
-  const options = [...cities, { city_name: "Others" }]; // Include "Others" in the options
-  const [loading, setLoading] = useState(false);
-  const [expandedEmployeeId, setExpandedEmployeeId] = useState(null); // State to manage expanded employees
-  const [showNewCityInput, setShowNewCityInput] = useState(false);
-  const [isSidebarExpanded, setSidebarExpanded] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const commonStyles = {
-    backgroundColor: 'rgba(60, 179, 113, 0.3)', // Medium Sea Green with 30% opacity
-    padding: '5px', // Padding around the text
+    // backgroundColor: 'rgba(60, 179, 113, 0.3)',
+   
+    padding: '5px', 
     borderRadius: '4px', // Rounded corners
-    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)', // Subtle shadow effect
+    // boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)', 
     color: '#000', // Black text color
     fontWeight: 'bold', // Bold text
    
@@ -101,7 +106,24 @@ const Employee = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchNextEmployeeId = async () => {
+      try {
+        const response = await Axios.get('/getLastEmployeeUserId'); // Replace with your actual API endpoint
+        if (response.data && response.data.next_user_id) {
+          setEmployeeId(response.data.next_user_id);
+          // setFormData((prevData) => ({
+          //   ...prevData,
+          //   user_id: response.data.next_user_id,
+          // }));
+        }
+      } catch (error) {
+        console.error('Error fetching next employee ID:', error);
+      }
+    };
 
+    fetchNextEmployeeId();
+  }, []);
 
   const fetchEmployees = async () => {
     try {
@@ -130,6 +152,7 @@ const Employee = () => {
     // Fetch employees when the component mounts
     useEffect(() => {
       fetchEmployees();
+    
     }, []);
     
     const handleDelete = async (id) => {
@@ -240,7 +263,7 @@ const handleEdit = async (employees) => {
     landmark: employees.landmark || "",
     alter_mobile_number: employees.alter_mobile_number || "",
     ref_user_id: employees.ref_user_id || localStorage.getItem("user_id"), // Default to localStorage user_id if ref_user_id is missing
-    ref_aadhar_number: employees.ref_aadhar_number || "",
+    ref_aadhar_number: employees.ref_aadhar_number || null,
 
     // Set the profile and sign photo if available or keep null if no new photo is selected
     profile_photo: profilePhotoFile || null,
@@ -359,11 +382,12 @@ const handleSubmit = async (e) => {
   const handleAdd = () => {
     setEditingEmployee(null);
     setFormData({
-      user_id: "",
+      user_id: EmployeeId,
       user_name: "",
       aadhar_number: "",
       address: "",
       city: "",
+      // cityInput:"",
       pincode: "",
       district: "",
       user_type: "employee",
@@ -564,14 +588,14 @@ const handleSubmit = async (e) => {
         <CircularProgress color="primary" />
       </div>
     ) : (
-      <Card variant="outlined" style={{ marginTop: '10px', padding: '10px', backgroundColor: 'rgba(209, 241, 221, 1)' }}>
+      <Card variant="outlined" style={{ marginTop: '10px', padding: '10px', backgroundColor: '#fff' }}>
         <CardContent>
           <Grid container spacing={2}>
             {/* Action Buttons */}
             <Grid item xs={12} container justifyContent="flex-end" spacing={1}>
               <Grid item>
                 <IconButton onClick={() => handleEdit(employees)} color="primary">
-                  <EditIcon style={{ color: "green" }} />
+                  <EditIcon style={{ color: "#07387A" }} />
                 </IconButton>
               </Grid>
               <Grid item>
@@ -585,89 +609,105 @@ const handleSubmit = async (e) => {
             <Grid container spacing={2}>
               {/* Left Column */}
               <Grid item xs={12} sm={6}>
-                <Typography variant="body2" color="textSecondary">Mobile Number:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Mobile Number: <span style={commonStyles}>
+                        {employees.mobile_number || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.mobile_number || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Aadhar Number:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Aadhar Number:  <span style={commonStyles}>
+                        {employees.aadhar_number || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.aadhar_number || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Address:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Address:<span style={commonStyles}>
+                        {employees.address || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.address || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Landmark:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Landmark: <span style={commonStyles}>
+                        {employees.landmark || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.landmark || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">City:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">City:<span style={commonStyles}>
+                        {employees.city || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.city || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Pincode:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Pincode:  <span style={commonStyles}>
+                        {employees.pincode || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.pincode || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">District:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">District: <span style={commonStyles}>
+                        {employees.district || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.district || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
               </Grid>
 
               {/* Right Column */}
               <Grid item xs={12} sm={6}>
-                <Typography variant="body2" color="textSecondary">Status:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Status:  <span style={commonStyles}>{employees.status || 'null'}</span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>{employees.status || 'null'}</span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Email:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Email: <span style={commonStyles}>{employees.email || 'null'}</span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>{employees.email || 'null'}</span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Reference Name:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Reference Name:<span style={commonStyles}>
+                        {employees.ref_name || 'null'}, {employees.ref_user_id || 'null'}
+                    </span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>
                         {employees.ref_name || 'null'}, {employees.ref_user_id || 'null'}
                     </span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Qualification:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Qualification: <span style={commonStyles}>{employees.qualification || 'null'}</span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>{employees.qualification || 'null'}</span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Designation:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Designation: <span style={commonStyles}>{employees.designation || 'null'}</span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>{employees.designation || 'null'}</span>
-                </Typography>
+                </Typography> */}
 
-                <Typography variant="body2" color="textSecondary">Added By:</Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="body2" color="textSecondary">Added By:<span style={commonStyles}>{employees.added_by || 'null'}</span></Typography>
+                {/* <Typography variant="subtitle1">
                     <span style={commonStyles}>{employees.added_by || 'null'}</span>
-                </Typography>
+                </Typography> */}
               </Grid>
             </Grid>
 
@@ -727,7 +767,8 @@ const handleSubmit = async (e) => {
       maxWidth: '400px',
       margin: '16px', // Margin around the dialog
       padding: '16px', // Padding inside the dialog
-      backgroundColor: 'rgb(209, 241, 221)', // Background color for the dialog
+      backgroundColor: '#fff', // Background color for the dialog07387A
+      color: '#07387A !important',
     },
   }}
 >
@@ -740,7 +781,7 @@ const handleSubmit = async (e) => {
         <label>Employee ID:</label>
         <input
           type="text"
-          name="user_id"
+          name="user_id" readOnly
           value={formData.user_id}
           onChange={handleChange}
         />
@@ -786,15 +827,17 @@ const handleSubmit = async (e) => {
       </div>
 
       <div>
-        <Autocomplete
+      <label>City:</label>
+        <Autocomplete className="cityfield"
           options={options} // Use the populated cities array
           getOptionLabel={(options) => options.city_name}
           onChange={handleCityChange}
           renderInput={(params) => (
             <TextField
               {...params}
-              label="City"
-              variant="outlined"
+             
+             
+              // variant="outlined"
               error={!!errors.city}
               helperText={errors.city && errors.city[0]}
               onChange={(e) => {
@@ -803,6 +846,7 @@ const handleSubmit = async (e) => {
                   city: e.target.value, // Allow typing in the input
                 }));
               }}
+              style={{color:"#fff",backgroundColor:""}}
             />
           )}
           noOptionsText="No cities found"
@@ -816,7 +860,7 @@ const handleSubmit = async (e) => {
           <input
             type="text"
             name="cityInput"
-            value={formData.cityInput}
+            value={formData.city}
             onChange={(e) =>
               setFormData((prevData) => ({
                 ...prevData,
@@ -845,9 +889,12 @@ const handleSubmit = async (e) => {
       <div>
   <label>District:</label>
   <select
+  className="district"
     name="district"
     value={formData.district}
     onChange={handleChange}
+    style={{color:"#000",
+      backgroundColor:"#fff",  }}
   >
     <option value="tirunelveli">Tirunelveli</option>
     <option value="tenkasi">Tenkasi</option>
@@ -879,6 +926,8 @@ const handleSubmit = async (e) => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          style={{
+            backgroundColor:"#fff",Color:"#000",border:"1px solid #ccc" }}
         />
         {errors.email && (
           <span className="error">{errors.email[0]}</span>
@@ -905,15 +954,16 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
           variant="outlined"
           sx={{
-            width: '100%', // Set width to 100% to fit the container
-            height: '56px', // Set the height to match other input fields (default Material-UI TextField height)
-          }}
+            width: '100%', 
+            height: '56px', 
+            color:"#07387A",
+            backgroundColor:"#fff"}}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
+                  edge="end" sx={{color:"#07387A"}}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -935,15 +985,17 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
           variant="outlined"
           sx={{
-            width: '100%', // Set width to 100% to fit the container
-            height: '56px', // Set the height to match other input fields
+            width: '100%', 
+            height: '56px', 
+            color:"#07387A",
+            backgroundColor:"#fff",
           }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  edge="end"
+                  edge="end" sx={{color:"#07387A"}}
                 >
                   {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -981,6 +1033,7 @@ const handleSubmit = async (e) => {
             value={formData.status}
             onChange={handleChange}
             displayEmpty
+            style={{color:"#07387A",backgroundColor:"#fff", border: "1px solid #ccc !important"}}
           >
             <MenuItem value="active">Active</MenuItem>
             <MenuItem value="inactive">Inactive</MenuItem>
@@ -993,6 +1046,7 @@ const handleSubmit = async (e) => {
   <input
     type="file"
     name="profile_photo"
+    style={{ border: "1px solid #ccc" }}
     onChange={handleFileChange} // Using handleFileChange here
     accept="image/*"
   />
@@ -1006,6 +1060,7 @@ const handleSubmit = async (e) => {
   <input
     type="file"
     name="sign_photo"
+    style={{ border: "1px solid #ccc" }}
     onChange={handleFileChange} // Using handleFileChange here
     accept="image/*"
   />
@@ -1019,7 +1074,7 @@ const handleSubmit = async (e) => {
     position: 'sticky',
     bottom: 0, // This will ensure it's stuck to the bottom
     zIndex: 100, // Ensure it stays on top of any other content
-    backgroundColor: 'white', // Optional: to ensure background color if content scrolls behind
+    backgroundColor: 'rgba(255, 255, 255, 2)',
     padding: '16px', // Adjust padding to match your layout
   }}
 >
@@ -1027,7 +1082,7 @@ const handleSubmit = async (e) => {
     type="submit" // Ensure this is inside the form
     sx={{
       color: 'white', // Set text color to white
-      backgroundColor: '#007bff', // Button color for "Add Employee" or "Update Employee"
+      backgroundColor: '#07387A', // Button color for "Add Employee" or "Update Employee"
       '&:hover': {
         backgroundColor: '#0056b3', // Darker shade on hover
       },

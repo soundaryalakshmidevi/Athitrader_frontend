@@ -1,3 +1,42 @@
+.employee-detail-images {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .employee-detail-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .employee-detail-item-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .employee-detail-item-image span {
+    font-weight: bold;
+    min-width: 200px; /* Adjust based on your layout */
+  }
+  
+  .employee-detail-item-image .image {
+    max-width: 150px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .employee-detail-item-image .image {
+    width: 150px; /* Set your desired width */
+    height: 150px; /* Make height equal to width */
+    object-fit: cover; /* Ensures the image maintains aspect ratio while filling the square */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
+
 .table-container-loan{
     width: 90%;
     margin: 20px 0; /* Add some margin for spacing */
@@ -79,13 +118,18 @@
 
 .loan-add{
     width: 250px;
-    background-color: #188b3E;
+    background-color: #07387A;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 5px;
+}
+
+.loan-add:hover
+{
+    background-color: #07387A;
 }
 .loan-cancel {
     width: 250px;
@@ -97,7 +141,13 @@
     border-radius: 5px;
     margin-top: 5px;
 }
-
+.loan-cancel:hover{
+    background-color: red;
+}
+.loan-add:hover
+{
+    background-color:blue !important;
+}
 .search-container {
     display: flex;
     align-items: center;

@@ -5,8 +5,13 @@
     display: flex; /* Flexbox for alignment */
     justify-content: center; /* Center the button horizontally */
 }
+.css-1lwhjos-MuiPaper-root-MuiDrawer-paper
+{
+    background: #fff  !important;   
+}
 .app-bar {
-    background: #188b3E !important;
+    /* background: #188b3E !important; */
+    background: #06387A  !important;
     margin-left: 200px !important; /* Default expanded sidebar width */
     z-index: 1201 !important; /* Keeps AppBar above Drawer */
     position: fixed !important;
@@ -34,11 +39,12 @@
 .logo-container {
     display: flex;
     align-items: center;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
+    background-color: #06387A;;
     width: 200px !important;
-    height: 80px !important;
+    height: 85px !important;
     transition: width 0.3s ease;
-    margin-left: -23px;
+    margin-left: -25px;
 
 }
 
@@ -47,22 +53,23 @@
 }
 
 .logo {
-    width: 150px !important;
+    width: 80px !important;
     height: 80px !important;
-    margin-left: 30px;
+    margin:5px 0px 0px 50px;
 }
 
 .logout-button {
-    background-color: #188b3E !important;
+    background-color: #07387A !important;
     width: 100px !important;
     color: white;
-    font-size: 18px !important;
+    font-size: 15px !important;
     justify-content: flex-start;
 }
 
 .sidebar {
     width: 240px; /* Adjust as per your design */
     transition: width 0.3s; /* Smooth transition */
+    
 }
 
 .sidebar.collapsed {
@@ -107,6 +114,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color:black;
 }
 
 .list-item:hover {

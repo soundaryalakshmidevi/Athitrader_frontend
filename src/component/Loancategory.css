@@ -11,7 +11,7 @@
   
   .small-button {
     width: 200px;
-    background-color: #188b3e;
+    background-color: #07387A;
     color: white;
     border-radius: 5px;
     padding: 10px;
@@ -21,7 +21,7 @@
   }
   
   .small-button:hover {
-    background-color: #145a2c;
+    background-color: #07387A;
   }
   
   .table-container-loancategory {

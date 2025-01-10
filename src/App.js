@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import GetStarted from './GetStarted';
 import Login from './component/Login'; 
 import Sidebar from './component/Sidebar';
@@ -19,7 +19,8 @@ import VerifyOtp from './component/Verifyotp';
 import ResetPassword from './component/Resetpassword';
 const App = () => {
     return (
-        <Router>
+    <div className='app'>
+        <BrowserRouter basename="/SriVariFinance">
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="" element={<GetStarted />} />
@@ -39,7 +40,8 @@ const App = () => {
                 <Route path="/verify-otp" element={<VerifyOtp/>} />
                 <Route path="/reset-password" element={<ResetPassword/>} />
             </Routes>
-            </Router>
+            </BrowserRouter>
+            </div>
     );
 };
 

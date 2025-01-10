@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Axios from "../Axios";
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import logoImage from '../asset/Ab Logo.png'; 
+import logoImage from '../asset/Srivari Logo.png'; 
 import '../Login.css';
 import { MdArrowForward } from 'react-icons/md';
 import Spinner from '../Spinner.js'; 
@@ -83,85 +83,98 @@ const Login = () => {
 
 
     return (
-        <div
-        className="container1"
-        style={{
-            height: '100vh',
-            width: '100vw',
-            backgroundImage: `url(${backgroundimage})`, // Set the background image here
-            
-            backgroundSize: 'cover', // Cover the full container
-            backgroundPosition: 'center', // Center the background image
-            backgroundRepeat: 'no-repeat', // Prevent repeating
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-        }}
-    >
-            <div className="login-container">
-                <img src={logoImage} alt="Athi Traders Logo" className="logo1" />
-                <h2>Sign In</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group-login">
-                        <label htmlFor="email">Employee Id</label>
-                        <input
-                          
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            autoComplete="email"
-                        />
-                    </div>
-    
-    
-                    <div className="form-group-login">
-      <label htmlFor="password">Password</label>
-      <TextField
-        fullWidth
-        id="password"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        autoComplete="current-password"
-        type={showPassword ? 'text' : 'password'}
-        variant="outlined"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleClickShowPassword}
-                edge="end"
-                aria-label="toggle password visibility"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        sx={{
-          height: 50, // Fixed height for the input field
-          '& .MuiInputBase-root': {
-            height: '100%',
-          },
-        }}
-      />
-    </div>
-
-                    <div className="forgot-password-login">
-                    <Link to="/forgotpassword">Forgot Password?</Link>
-                    </div>
-
-                    <button type="submit" disabled={loading}> {/* Disable button when loading */}
-                        {loading ? <Spinner /> : <>Sign in <MdArrowForward /></>} {/* Show spinner or text */}
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
+      <div
+          className="container1"
+          style={{
+              height: '100vh',
+              width: '100vw',
+              backgroundColor: '#fff',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+          }}
+      >
+          <div className="login-container" style={{ position: 'relative', backgroundColor: '#07387A' }}>
+              {loading && (
+                  <div className="spinner-overlay" style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      zIndex: 100,
+                  }}>
+                      <Spinner style={{ color: '#07387A' }} />
+                  </div>
+              )}
+              <img src={logoImage} alt="Athi Traders Logo" className="logo1" />
+              <form onSubmit={handleSubmit} style={{ opacity: loading ? 0.5 : 1, pointerEvents: loading ? 'none' : 'auto' }}>
+                  <div className="form-group-login">
+                      <label htmlFor="email" style={{ color: '#fff' }}>Employee Id</label>
+                      <input
+                          id="email"
+                          name="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          autoComplete="email"
+                      />
+                  </div>
+                  <div className="form-group-login">
+                      <label htmlFor="password" style={{ color: '#fff' }}>Password</label>
+                      <TextField
+                          fullWidth
+                          id="password"
+                          name="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          autoComplete="current-password"
+                          type={showPassword ? 'text' : 'password'}
+                          variant="outlined"
+                          style={{ backgroundColor: '#fff', borderRadius: '5px' }}
+                          InputProps={{
+                              endAdornment: (
+                                  <InputAdornment position="end">
+                                      <IconButton
+                                          onClick={handleClickShowPassword}
+                                          edge="end"
+                                          aria-label="toggle password visibility"
+                                          style={{ color: '#E8B701' }}
+                                      >
+                                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                                      </IconButton>
+                                  </InputAdornment>
+                              ),
+                          }}
+                          sx={{
+                              height: 50,
+                              '& .MuiInputBase-root': {
+                                  height: '100%',
+                              },
+                              '& .MuiOutlinedInput-notchedOutline': {
+                                  border: 'none',
+                              },
+                          }}
+                      />
+                  </div>
+                  <div className="forgot-password-login">
+                      <Link to="/forgotpassword" style={{ color: '#E8B701' }}>Forgot Password?</Link>
+                  </div>
+                  <button type="submit" disabled={loading} style={{ backgroundColor: '#E8B701' }}>
+                      <span style={{ fontWeight: 'bold' }}>
+                          SIGN IN <MdArrowForward />
+                      </span>
+                  </button>
+              </form>
+          </div>
+      </div>
+  );
 };
 
 export default Login;

@@ -13,12 +13,12 @@
   }
   
   .chart-title {
-    color: #188b3E;
+    color: #07387A;
   }
   
   .view-more-link {
     text-decoration: none;
-    color: #188b3E;
+    color: #07387A;
   }
   
   .table-container {
@@ -33,7 +33,7 @@
   }
   
   .chart-card .MuiTableRow-root + .MuiTableRow-root {
-    border-top: 2px solid mediumseagreen; /* Add a medium sea green line between rows */
+    border-top: 2px solid #07387A;
   }
   
   .chart-card .MuiTableCell-root {
@@ -61,11 +61,11 @@
   }
   
   .header-title {
-    color: #188b3E;
+    color: #07387A;
   }
   
   .header-avatar {
-    background-color: #188b3E;
+    background-color: #07387A;
   }
   
   .stat-card {
@@ -80,7 +80,7 @@
   }
   
   .stat-value {
-    color: #188b3E;
+    color: #07387A;
   }
   
   .chart-card {
@@ -94,7 +94,7 @@
   }
   
   .chart-title {
-    color: #188b3E;
+    color: #07387A;
   }
   
   .view-more-link {
@@ -113,6 +113,6 @@
   }
   
   .employee-title {
-    color: #188b3E;
+    color: #07387A;
   }
   

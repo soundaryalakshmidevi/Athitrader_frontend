@@ -73,20 +73,25 @@ const ParticularLoanDue = () => {
 
     const handleUpdate = async () => {
         try {
-            await Axios.put(`/update-future-date/${loan_id}`, formData);
+            await Axios.put(`/checkloancategory/${loan_id}`, formData);
             // Optionally, refetch loan dues or update state accordingly
             // Example: fetchLoanDues();
             setShowForm(false); // Close the form
-            window.location.reload(); 
+            // window.location.reload(); 
         } catch (error) {
             console.error("Error updating loan due:", error);
-             // Check if error response contains the specific message
-        if (error.response && error.response.data.message === "First work on unpaid due") {
-            alert("First work on unpaid due"); // Display the message in an alert
-        } else {
-            alert("An error occurred while updating the loan due. Please try again.");
+            if (error.response) {
+                // Check if the specific error message exists
+                if (error.response.data && error.response.data.message === "First work on unpaid due") {
+                    alert("First work on unpaid due"); // Display the message in an alert
+                } else {
+                    alert("An error occurred: " + (error.response.data.message || "Please try again."));
+                }
+            } else {
+                alert("An unexpected error occurred. Please check your connection and try again.");
+            }
         }
-        }
+        
     };
 
     if (loading) {
@@ -104,7 +109,8 @@ const ParticularLoanDue = () => {
             variant="h5" 
             component="h2" 
             sx={{ 
-                color: '#7f223d',  // Custom color
+                Color: '#fff',
+    backgroundColor: '#07387A',
                 fontWeight: 'bold', // Bold text
                 textAlign: 'center', // Center alignment
                 marginBottom: 2      // Space below the heading
@@ -147,7 +153,7 @@ const ParticularLoanDue = () => {
             <td>{new Date(loanDue.due_date).toLocaleDateString()}</td>
             <td>{loanDue.status}</td>
             <td>
-              <IconButton 
+              <IconButton sx={{color:'#07387A'}}
                 onClick={() => handleEdit(loanDue)} 
                 disabled={!canEdit}
               >
@@ -244,8 +250,12 @@ const ParticularLoanDue = () => {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setShowForm(false)}>Cancel</Button>
-                        <Button onClick={handleUpdate}>Update</Button>
+                        <Button sx={{color:'#fff', backgroundColor:' red', '&:hover': {
+      backgroundColor: 'red', // Keep the background color red on hover
+    },}}onClick={() => setShowForm(false)}>Cancel</Button>
+                        <Button  sx={{color:'#fff', backgroundColor:' #07387A', '&:hover': {
+      backgroundColor: '#07387A', // Keep the background color red on hover
+    },}} onClick={handleUpdate}>Update</Button>
                     </DialogActions>
                 </Dialog>
             </div>

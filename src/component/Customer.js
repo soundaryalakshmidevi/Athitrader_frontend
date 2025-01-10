@@ -79,7 +79,26 @@ const Customer = () => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+   const [  CustomerId ,setCustomerId ] = useState('');
 
+    useEffect(() => {
+        const fetchNextCustomerId = async () => {
+          try {
+            const response = await Axios.get('/getLastCustomerUserId'); // Replace with your actual API endpoint
+            if (response.data && response.data.next_user_id) {
+              setCustomerId(response.data.next_user_id);
+              // setFormData((prevData) => ({
+              //   ...prevData,
+              //   user_id: response.data.next_user_id,
+              // }));
+            }
+          } catch (error) {
+            console.error('Error fetching next employee ID:', error);
+          }
+        };
+    
+        fetchNextCustomerId();
+      }, []);
     // const handleSearchChange = (event) => {
     //     setSearchQuery(event.target.value);
     // };
@@ -478,7 +497,7 @@ const customersToDisplay = filteredCustomers.slice(
     const handleAdd = () => {
         setEditingcustomer(null);
         setFormData({
-            user_id: '',
+            user_id: CustomerId,
             user_name: '',
             aadhar_number: '',
             address: '',
@@ -665,19 +684,27 @@ const customersToDisplay = filteredCustomers.slice(
                 
             <div className="table-container-customer">
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-        <button className="small-button" onClick={() => setShowForm(true)}>Add Customers</button>
+        <button className="small-button" onClick={handleAdd}>Add Customers</button>
         <TextField
             label="Search by Customer name and id"
             variant="outlined"
             fullWidth
             value={searchTerm}
+            
             onChange={handleSearchChange}
             InputProps={{
                 startAdornment: (
-                    <SearchOutlined style={{ marginRight: 8 }} />
+                    <SearchOutlined 
+                    className="searchcustomer" 
+                    style={{ 
+                      marginRight: 8, 
+                      backgroundColor: "#fff", // No need for !important in inline styles
+                    }} 
+                  />
+                  
                 ),
             }}
-            style={{ marginBottom: '20px' }}
+            style={{ marginBottom: '20px' ,backgroundColor:"#fff"}}
         />
     </div>
 
@@ -686,13 +713,71 @@ const customersToDisplay = filteredCustomers.slice(
     {paginatedCustomers.map((customerfirst) => (
         <div key={customerfirst.user_id} className="maincard">
             <div className={`employee-card-customer ${expandedcustomerId === customerfirst.user_id ? 'expanded' : ''}`}>
-                <div className="employee-header" onClick={() => handleToggleExpand(customerfirst)}>
-                    <div><span className="employee-user-id">{customerfirst.user_id}</span></div>
-                    <div><span className="employee-name">{customerfirst.user_name}</span></div>
-                    <span className={`expand-icon ${expandedcustomerId === customerfirst.user_id ? 'rotate' : ''}`}>
+                {/* <div style={{alignItems:"left"  }}  className="employee-header" onClick={() => handleToggleExpand(customerfirst)}>
+                    <div style={{  }}><span className="employee-user-id">{customerfirst.user_id}</span></div>
+                    <div style={{}}><div><span className="employee-name">{customerfirst.user_name}</span></div></div>
+                    <span style={{ marginRight: "5px"}} className={`expand-icon ${expandedcustomerId === customerfirst.user_id ? 'rotate' : ''}`}>
                         <DownOutlined />
                     </span>
-                </div>
+                </div> */}
+
+
+<div 
+    style={{ 
+        display: "flex", 
+        alignItems: "center", 
+        padding: "10px" 
+    }} 
+    className="employee-header" 
+    onClick={() => handleToggleExpand(customerfirst)}
+>
+    <div 
+        style={{ 
+            // marginRight: "15px", 
+            // paddingRight: "10px", 
+            width: "80px", /* Fixed width to align items consistently */
+            textAlign: "left" /* Ensure text aligns to the left */
+        }}
+    >
+        <span className="employee-user-id">{customerfirst.user_id}</span>
+    </div>
+    <div 
+        style={{ 
+            width: "100px",
+            textAlign: "left" /* Align the text inside to the left */
+        }}
+    >
+        <div>
+            <span>{customerfirst.user_name}</span>
+        </div>
+    </div>
+
+    <div 
+        style={{ 
+            width: "50px",
+    
+            textAlign: "left" /* Align the text inside to the left */
+        }}
+    >
+        <div>
+            <span>{customerfirst.city}</span>
+        </div>
+    </div>
+    <span 
+        style={{ 
+            marginLeft: "auto", 
+            marginRight: "5px", 
+            transition: "transform 0.3s ease", 
+            transform: expandedcustomerId === customerfirst.user_id ? "rotate(180deg)" : "none" 
+        }}
+        className="expand-icon"
+    >
+        <DownOutlined />
+    </span>
+</div>
+
+
+
 
                 {expandedcustomerId === customerfirst.user_id && (
     <div className="employee-details">
@@ -702,20 +787,17 @@ const customersToDisplay = filteredCustomers.slice(
             </div>
         ) : (
             customer && Object.keys(customer).length > 0 ? (
-                <Card variant="outlined" style={{ marginTop: '10px', padding: '10px', backgroundColor: 'rgba(209, 241, 221, 1)' }}>
+                <Card variant="outlined" style={{ marginTop: '10px', padding: '10px', backgroundColor: '#FBEFC6' }}>
                     <CardContent>
                         <Grid container spacing={2}>
                             <Grid item xs={12} container justifyContent="flex-end" spacing={1}>
                                 <Grid item>
                                     <IconButton onClick={() => handleEdit(customer)} color="primary">
-                                        <EditIcon style={{ color: "green" }} />
+                                        <EditIcon style={{ color: "#07387A" }} />
                                     </IconButton>
                                 </Grid>
                                 <Grid item>
-                                    {/* <IconButton onClick={() => handleDelete(customerfirst.user_id)} color="secondary">
-                                        <DeleteIcon style={{ color: "red" }} />
-                                    </IconButton> */}
-
+                                   
 <div>
       {/* Delete IconButton */}
       <IconButton onClick={() => handleClickOpen(customerfirst.user_id)} color="secondary">
@@ -870,15 +952,15 @@ const customersToDisplay = filteredCustomers.slice(
     fullWidth 
     maxWidth="sm" 
     PaperProps={{
-        style: { backgroundColor: 'rgba(209, 241, 221, 1)' }
+        style: { backgroundColor: '#fff' }
     }}
 >
                     <DialogContent>
-                        <h3>{editingcustomer ? 'Edit Customer' : 'Add Customer'}</h3>
+                        <h3 style={{color:"#07387A"}}>{editingcustomer ? 'Edit Customer' : 'Add Customer'}</h3>
                         <form onSubmit={handleSubmit}>
                             <div>
                                 <label>Customer ID:</label>
-                                <input type="text" name="user_id" value={formData.user_id} onChange={handleChange}  />
+                                <input type="text" name="user_id" value={formData.user_id} onChange={handleChange} readOnly />
                                 {errors.user_id && <span className="error">{errors.user_id[0]}</span>}
                             </div>
                             <div>
@@ -899,6 +981,7 @@ const customersToDisplay = filteredCustomers.slice(
                                 {errors.address && <span className="error">{errors.address[0]}</span>}
                             </div>
                             <div>
+                            <label>City:</label>
                 <Autocomplete
                   options={options} // Use the populated cities array
                   getOptionLabel={(option) => option.city_name}
@@ -916,6 +999,7 @@ const customersToDisplay = filteredCustomers.slice(
                           city: e.target.value, // Allow typing in the input
                         }));
                       }}
+                      sx={{backgroundColor:"#fff",color:"#000"}}
                     />
                   )}
                   noOptionsText="No cities found"
@@ -960,8 +1044,10 @@ const customersToDisplay = filteredCustomers.slice(
         name="district" 
         value={formData.district} 
         onChange={handleChange}
+        sx={{backgroundColor:"#fff"}}
     >
-        <option value="tirunelveli">Tirunelveli</option>
+         <option sx={{backgroundColor:"#fff"}} value="">Select a district</option>
+        <option  value="tirunelveli">Tirunelveli</option>
         <option value="tenkasi">Tenkasi</option>
         <option value="Virudhunagar">Virudhunagar</option>
         <option value="kerala">Kerala</option>
@@ -972,12 +1058,13 @@ const customersToDisplay = filteredCustomers.slice(
     {errors.district && <span className="error">{errors.district[0]}</span>}
 </div>
 
-                            <div>
-                                <label>Mobile Number:</label>
-                                <input type="text" name="mobile_number" value={formData.mobile_number} onChange={handleChange}  />
-                                {errors.mobile_number && <span className="error">{errors.mobile_number[0]}</span>}
-                            </div>
-                            <div>
+         <div>
+            <label>Mobile Number:</label>
+            <input type="text" name="mobile_number" value={formData.mobile_number} onChange={handleChange}  />
+            {errors.mobile_number && <span className="error">{errors.mobile_number[0]}</span>}
+         </div>
+
+     <div>
     <label>Email:</label>
     <input
         type="email"
@@ -1123,9 +1210,21 @@ const customersToDisplay = filteredCustomers.slice(
                display: 'flex', // Align buttons in a row
                justifyContent: 'flex-end', // Align buttons to the right
             }}>
-                <Button type="submit" variant="contained" color="primary" style={{ marginRight: 8 }}>
-                    {editingcustomer ? 'Update Customer' : 'Add Customer'}
-                </Button>
+                <Button
+  type="submit"
+  variant="contained"
+  sx={{
+    marginRight: 2, // Material-UI uses spacing units; 2 = 8px
+    color: '#fff', // Text color
+    backgroundColor: '#07387A', // Optional background color if desired
+    '&:hover': {
+      backgroundColor: '#D6A300', // Change background on hover
+    },
+  }}
+>
+  {editingcustomer ? 'Update Customer' : 'Add Customer'}
+</Button>
+
                 <Button 
                         type="button"  
                         style={{ 

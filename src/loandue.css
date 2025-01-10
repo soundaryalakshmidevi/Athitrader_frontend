@@ -1,3 +1,42 @@
+/* Style for the table row when it is collapsed */
+.highlight-same-due-date {
+    background-color: lightblue;  /* Highlight color */
+    padding-top: 50px;            /* Add padding at the top */
+    padding-bottom: 50px;         /* Add padding at the bottom */
+}
+
+
+.expanded-row {
+    max-height: 0;               /* Initially, hide the row by setting the max-height to 0 */
+    overflow: hidden;            /* Prevent content from spilling out */
+    transition: max-height 0.3s ease-out; /* Smooth transition for the height */
+    background-color: #f0f8ff;  /* Light blue background for dropdown rows */
+    font-style: italic;          /* Optional: makes the text italicized for dropdown rows */
+    border-left: 3px solid #7f223d; /* Optional: adds a left border to visually indicate a nested row */
+}
+
+/* When the row is expanded */
+.expanded-row.expanded {
+    max-height: 1000px;           /* Give a large max-height to fully reveal the content */
+    transition: max-height 0.3s ease-in; /* Smooth transition for expansion */
+}
+
+/* Optional: Style for the arrow icon */
+.arrow-icon {
+    margin-left: 10px; /* Adds spacing between the arrow and other icons */
+}
+
+/* Optional: Change the icon size */
+.arrow-icon {
+    font-size: 20px;
+    background-color: #007bff !important;
+}
+.arrowdropdown
+{
+    background-color: #7f223d !important;
+}
+
+
 .table-container-loandue {
     width: 800px;
     margin: 20px 0; /* Add some margin for spacing */
@@ -11,12 +50,13 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: lightsteelblue;
 }
 
 .loan-table th, .loan-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .loan-table th {
@@ -40,7 +80,7 @@
     padding: 10px; /* Optional: adds padding for better spacing */
     border: 1px solid #f0f0f0; /* Optional: adds a light border for visual separation */
     border-radius: 5px; /* Optional: rounded corners */
-    background-color: mediumseagreen; /* Optional: white background for better contrast */
+    background-color: #07387A; /* Optional: white background for better contrast */
 }
 .loan-group-loandue {
     justify-content: space-between !important;
@@ -84,7 +124,8 @@ input[type="date"] {
 
 /* Dropdown select styling */
 select {
-    background-color: mediumseagreen;
+    /* background-color: #07387A; */
+    /* color: #fff; */
     padding: 6px 8px; /* Adjusts padding inside the dropdown */
     font-size: 14px; /* Consistent font size with the date input */
     border: 1px solid #ccc; /* Light border around the dropdown */

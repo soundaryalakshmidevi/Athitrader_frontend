@@ -27,11 +27,30 @@ const Loancategory = () => {
         status: 'active',
     });
     const [isSidebarExpanded, setSidebarExpanded] = useState(true);
-
+    const [CategoryId, setCategoryId] = useState('');
 
     // Fetch employees when the component mounts
     useEffect(() => {
        
+    }, []);
+
+useEffect(() => {
+    const fetchNextCategoryId = async () => {
+        try {
+          const response = await Axios.get('/getLastCategoryId'); // Replace with your actual API endpoint
+          if (response.data && response.data.next_Category_id) {
+            setCategoryId(response.data.next_Category_id);
+            // setFormData((prevData) => ({
+            //   ...prevData,
+            //   user_id: response.data.next_user_id,
+            // }));
+          }
+        } catch (error) {
+          console.error('Error fetching next category ID:', error);
+        }
+      };
+  
+      fetchNextCategoryId();
     }, []);
 
     const fetchcategory = async () => {
@@ -54,6 +73,7 @@ const Loancategory = () => {
                 await Axios.delete(`category/${category_id}`);
                 setcategory(category.filter(category => category.category_id !== category_id));
                 alert('Category deleted successfully!');
+                window.location.reload(); 
             } catch (error) {
                 alert('Error deleting category: ' + error.message);
             }
@@ -80,7 +100,7 @@ const Loancategory = () => {
         setEditingcategory(null);
         setFormData({
             loan_id:'',
-            category_id: '',
+            category_id: CategoryId,
             category_name: '',
             category_type: '',
             duration: '',
@@ -183,7 +203,7 @@ const Loancategory = () => {
                                                 <Typography variant="body1"><strong>Category Type:</strong> {category.category_type}</Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography variant="body1"><strong>Duration:</strong> {category.duration} months</Typography>
+                                                <Typography variant="body1"><strong>Duration:</strong> {category.duration} {category.category_type}</Typography>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography variant="body1"><strong>Interest Rate:</strong> {category.interest_rate}%</Typography>
@@ -206,15 +226,15 @@ const Loancategory = () => {
 
 
 <Dialog open={showForm} onClose={() => setShowForm(false)} fullWidth maxWidth="sm">
-    <DialogContent style={{ backgroundColor: 'rgb(209, 241, 221)', padding: '20px' }}>
-        <h3 style={{ marginBottom: '20px', color: '#333' }}>{editingcategory ? 'Edit Loan Category' : 'Add Loan Category'}</h3>
+    <DialogContent style={{ backgroundColor: '#fff', padding: '20px' }}>
+        <h3 style={{ marginBottom: '20px', color: '#07387A' }}>{editingcategory ? 'Edit Loan Category' : 'Add Loan Category'}</h3>
         <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '15px' }}>
                 <label style={{ display: 'block', marginBottom: '5px' }}>Category Id</label>
                 <input 
                     type="text" 
                     name="category_id" 
-                    value={formData.category_id} 
+                    value={formData.category_id} readOnly
                     onChange={(e) => setFormData({ ...formData, category_id: e.target.value })} 
                     required 
                     style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
@@ -239,8 +259,9 @@ const Loancategory = () => {
                     onChange={(e) => setFormData({ ...formData, category_type: e.target.value })}
                     required
                     className="category-type"
-                    style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
+                    style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px',backgroundColor:'#fff',color:'#000' }}
                 >
+                    <option value="">Select category type</option>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="daily">Daily</option>
@@ -275,7 +296,7 @@ const Loancategory = () => {
     value={formData.status} 
     onChange={(e) => setFormData({ ...formData, status: e.target.value })} 
     required 
-    style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
+    style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px',backgroundColor:'#fff',color:'#000' }}
   >
     <option value="active">Active</option>
     <option value="inactive">Inactive</option>
@@ -299,13 +320,13 @@ const Loancategory = () => {
         <Button 
             type="submit" 
             onClick={handleSubmit} 
-            style={{ backgroundColor: '#3B82F6', color: 'white', padding: '10px 15px', border: 'none', borderRadius: '4px', marginRight: '10px' }}
+            style={{ backgroundColor: '#07387A', color: 'white', padding: '5px 5px', border: 'none', borderRadius: '4px', marginRight: '5px' }}
         >
             {editingcategory ? 'Update' : 'Add'}
         </Button>
         <Button 
             onClick={() => setShowForm(false)} 
-            style={{ backgroundColor: '#EF4444', color: 'white', padding: '10px 15px', border: 'none', borderRadius: '4px' }}
+            style={{ backgroundColor: '#EF4444', color: 'white', padding: '5px 5px', border: 'none', borderRadius: '4px' }}
         >
             Cancel
         </Button>

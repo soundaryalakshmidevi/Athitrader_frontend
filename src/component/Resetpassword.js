@@ -50,17 +50,17 @@ function ResetPassword() {
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
-          backgroundColor: 'mediumseagreen',
+          backgroundColor: '#07387A',
           padding: { xs: 2, sm: 3, md: 4 },
-          borderRadius: 1,
+          borderRadius: 4,
           boxShadow: 3,
           textAlign: 'center',
           width: '100%',
           maxWidth: { xs: 300, sm: 350, md: 400 },
-          marginTop: '20px',
+          marginTop: '100px',
         }}
       >
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom sx={{color:'#fff'}}> 
           Reset Password
         </Typography>
         <TextField
@@ -114,10 +114,11 @@ function ResetPassword() {
           onClick={handleResetPassword}
           sx={{
             marginTop: 2,
-            backgroundColor: '#fff',
-            color: 'mediumseagreen',
+            backgroundColor: '#E8B701',
+            color: '#fff',
             '&:hover': {
-              backgroundColor: '#f1f1f1',
+              backgroundColor: '#E8B701',
+                color: '#fff',
             },
           }}
         >
